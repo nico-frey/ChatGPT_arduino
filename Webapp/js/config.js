@@ -1,5 +1,4 @@
 const notifications = [
-    
   {
     name: "shake",
     uuid: "19b10016-e8f2-537e-4f6c-d104768a1214", // Only needed for BLE
@@ -19,20 +18,20 @@ const notifications = [
     info: "* has been pressed on the keyboard. Sing a song about the Zurich Univesity of the Arts.",
   },
   // add more notifications here based on some custom functions
-];
+]
 
 const local_functionList = {
-    start_party: {
-      dataType: "boolean",
-      description: "0 is off, 1 is on. Creates a party effect in the browser",
-    },
-    // add other custom functions here
-  }
+  start_party: {
+    dataType: "boolean",
+    description:
+      "0 is off, 1 is on. Creates a party effect in the browser",
+  },
+  // add other custom functions here
+}
 
 const config = {
-  
   chatGPTSettings: {
-    temperature: 0.99,//Number between -2.0 and 2.0 //Positive value decrease the model's likelihood to repeat the same line verbatim.
+    temperature: 0.99, //Number between -2.0 and 2.0 //Positive value decrease the model's likelihood to repeat the same line verbatim.
     frequency_penalty: 0.5, //Number between -2.0 and 2.0. //Positive values increase the model's likelihood to talk about new topics.
     presence_penalty: 0.0, //Number between -2.0 and 2.0. //Positive values increase the model's likelihood to generate words and phrases present in the input prompt
     model: "gpt-4o-mini", //gpt-4o-mini, gpt-4o, gpt-4, gpt-3.5-turbo
@@ -44,13 +43,20 @@ const config = {
   communicationMethod: "Serial", // or "BLE"
   serviceUuid: "19b10000-e8f2-537e-4f6c-d104768a1214", // Only needed for BLE
 
-  // The list of functions should match those set up on the arduino 
+  // The list of functions should match those set up on the arduino
   functionList: {
     set_LED: {
       uuid: "19b10001-e8f2-537e-4f6c-d104768a1214", // Only needed for BLE
       commType: "write",
       dataType: "boolean",
       description: "0 is off, 1 is on",
+    },
+    lightStripColor: {
+      uuid: "19b10001-e8f2-537e-4f6c-d104768a1214", // Only needed for BLE
+      commType: "write",
+      dataType: "string",
+      description:
+        "give me three values between 0 - 255 for each color of the R,G and B spectrum. make sure it's in the format of '000,000,000' ",
     },
     get_LED: {
       uuid: "19b10001-e8f2-537e-4f6c-d104768a1214", // Only needed for BLE
@@ -96,11 +102,13 @@ const config = {
   conversationProtocol: [
     {
       role: "system",
-      content: `You control an external device with several functions calls. You must first be connected before attempting any other functions.You will also sometimes receive notifications from events ${JSON.stringify(notifications )}.You will be very helpful, and offer advice is the api doesnt work as expected.`,
+      content: `You control an external device with several functions calls. You must first be connected before attempting any other functions.You will also sometimes receive notifications from events ${JSON.stringify(
+        notifications
+      )}.You will be very helpful, and offer advice is the api doesnt work as expected.`,
     },
 
- // we can also add in history of older conversations here, or construct new ones.
-/*
+    // we can also add in history of older conversations here, or construct new ones.
+    /*
 {
     "role": "assistant",
     "content": "I have better things to do than talk to you. Go away!"
@@ -127,4 +135,4 @@ const config = {
 },
  */
   ],
-};
+}
